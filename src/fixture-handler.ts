@@ -1,4 +1,4 @@
-import { CloudFormationCustomResourceEvent } from "aws-lambda";
+import { CloudFormationCustomResourceEvent } from 'aws-lambda';
 import { send, SUCCESS } from './cfn-response';
 
 const tableName = process.env.TABLE_NAME;
@@ -9,5 +9,5 @@ export const handler = async (event: CloudFormationCustomResourceEvent, context:
 
   // start making some DynamoDB calls.
   // do you see the problem here?
-  send({ ...event, PhysicalResourceId: context.logStreamName }, SUCCESS, {});
-}
+  await send({ ...event, PhysicalResourceId: context.logStreamName }, SUCCESS, {});
+};

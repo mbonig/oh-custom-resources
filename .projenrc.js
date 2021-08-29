@@ -3,7 +3,8 @@ const project = new AwsCdkTypeScriptApp({
   cdkVersion: '2.0.0-rc.18',
   defaultReleaseBranch: 'main',
   name: 'custom-resources',
-  deps: ['@types/aws-lambda']
+  deps: ['aws-lambda'],
+  devDeps: ['@types/aws-lambda'],
   // cdkDependencies: undefined,        /* Which AWS CDK modules (those that start with "@aws-cdk/") this app uses. */
   // deps: [],                          /* Runtime dependencies of this module. */
   // description: undefined,            /* The description is just a string that helps people understand the purpose of the package. */
