@@ -8,6 +8,5 @@ export const handler = async (event: CloudFormationCustomResourceEvent, context:
   console.log('TableName: ', tableName);
 
   // start making some DynamoDB calls.
-  // do you see the problem here?
-  send({ ...event, PhysicalResourceId: context.logStreamName }, SUCCESS, {});
+  await send({ ...event, PhysicalResourceId: context.logStreamName }, SUCCESS, {});
 }
