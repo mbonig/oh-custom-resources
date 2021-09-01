@@ -2,6 +2,7 @@ import * as path from 'path';
 import { App, CustomResource, Stack, StackProps } from 'aws-cdk-lib';
 import { AttributeType, ITable, Table } from 'aws-cdk-lib/aws-dynamodb';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { Provider } from 'aws-cdk-lib/custom-resources';
 import { Construct } from 'constructs';
 
 interface TableFixtureProps {
@@ -21,9 +22,11 @@ class TableFixture extends Construct {
     });
 
     props.table.grantWriteData(handler);
-
+    const provider = new Provider(this, 'FixtureProvider', {
+      onEventHandler: handler,
+    });
     new CustomResource(this, 'FixtureCR', {
-      serviceToken: handler.functionArn,
+      serviceToken: provider.serviceToken,
       properties: {
         records: props.records,
         timestamp: new Date().toISOString(),
