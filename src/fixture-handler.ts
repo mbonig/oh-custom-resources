@@ -11,7 +11,7 @@ export const handler = async (event: CloudFormationCustomResourceEvent, context:
   console.log('Records:', records);
 
   if (event.RequestType === 'Delete') {
-    return { ...event, PhysicalResourceId: context.logStreamName };
+    return event;
   }
 
   const client = DynamoDBDocumentClient.from(new DynamoDBClient({}));
